@@ -1,0 +1,31 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vulnerability Checker</title>
+</head>
+<body>
+    <h1>Vulnerability Checker</h1>
+    <form>
+        <label for="link">Enter a link:</label>
+        <input type="text" id="link" name="link">
+        <button type="submit">Check</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const link = document.querySelector('#link').value;
+            const response = await fetch('/check-vulnerability', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ link }),
+            });
+            const output = await response.text();
+            document.querySelector('#output').innerHTML = output;
+        });
+    </script>
+</body>
+</html>

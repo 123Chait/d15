@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Tools</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        
+        /* Navigation menu */
+        nav {
+            background-color: #333; /* Dark gray background */
+            padding: 10px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #fff; /* White text */
+            text-decoration: none;
+        }
+        
+        /* Section styles */
+        section {
+            background-color: #fff; /* White background */
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+        }
+        section h2 {
+            margin-top: 0;
+        }
+        
+        /* Form styles */
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="file"], input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50; /* Green background */
+            color: #fff; /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #3e8e41; /* Darker green background */
+        }
+        
+        /* Output styles */
+        #output {
+            padding: 20px;
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px;
+            background-color: #f9f9f9; /* Light gray background */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#deep-fake-face-detection">Deep Fake Face Detection</a></li>
+            <li><a href="#sos-button">SOS Button</a></li>
+            <li><a href="#vulnerability-checker">Vulnerability Checker</a></li>
+        </ul>
+    </nav>
+
+    <section id="deep-fake-face-detection">
+        <h2>Deep Fake Face Detection</h2>
+        <form>
+            <label for="image">Select an image:</label>
+            <input type="file" id="image" name="image">
+            <button type="submit">Detect</button>
+        </form>
+        <div id="deep-fake-output"></div>
+
+        <script>
+            const deepFakeForm = document.querySelector('#deep-fake-face-detection form');
+            deepFakeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const image = document.querySelector('#image').files[0];
+                const formData = new FormData();
+                formData.append('image', image);
+                const response = await fetch('/detect-deep-fake', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const output = await response.text();
+                document.querySelector('#deep-fake-output').innerHTML = output;
+            });
+        </script>
+    </section>
+
+    <section id="sos-button">
+        <h2>SOS Button</h2>
+        <button id="sos-button">SOS</button>
+        <div id="sos-output"></div>
+
+        <script>
+            const sosButton = document.querySelector('#sos-button');
+            sosButton.addEventListener('click', async () => {
+                const response = await fetch('/sos');
+                const output = await response.text();
+                document.querySelector('#sos-output').innerHTML = output;
+            });
+        </script>
+    </section>
+
+    <section id="vulnerability-checker">
+        <h2>Vulnerability Checker</h2>
+        <form>
+            <label for="link">Enter a link:</label>
+            <input type="text" id="link" name="link">
+            <button type="submit">Check</button>
+        </form>
+        <div id="vulnerability-output"></div>
+
+        <script>
+            const vulnerabilityForm = document.querySelector('#vulnerability-checker form');
+            vulnerabilityForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const link

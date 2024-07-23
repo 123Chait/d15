@@ -1,0 +1,21 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SOS Button</title>
+</head>
+<body>
+    <h1>SOS Button</h1>
+    <button id="sos-button">SOS</button>
+    <div id="output"></div>
+
+    <script>
+        const sosButton = document.querySelector('#sos-button');
+        sosButton.addEventListener('click', async () => {
+            const response = await fetch('/sos');
+            const output = await response.text();
+            document.querySelector('#output').innerHTML = output;
+        });
+    </script>
+</body>
+</html>

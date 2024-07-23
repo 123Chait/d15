@@ -1,0 +1,32 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deep Fake Face Detection</title>
+</head>
+<body>
+    <h1>Deep Fake Face Detection</h1>
+    <form>
+        <label for="image">Select an image:</label>
+        <input type="file" id="image" name="image">
+        <button type="submit">Detect</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const image = document.querySelector('#image').files[0];
+            const formData = new FormData();
+            formData.append('image', image);
+            const response = await fetch('/detect-deep-fake', {
+                method: 'POST',
+                body: formData,
+            });
+            const output = await response.text();
+            document.querySelector('#output').innerHTML = output;
+        });
+    </script>
+</body>
+</html>
